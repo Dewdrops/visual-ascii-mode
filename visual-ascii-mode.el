@@ -6,7 +6,7 @@
 ;; URL: https://github.com/Dewdrops/visual-ascii-mode
 ;; Version: 0.1
 ;; Keywords: presentation
-;; Package-Requires: ((dash "2.10"))
+;; Package-Requires:
 
 ;; This file is NOT part of GNU Emacs.
 
@@ -29,9 +29,6 @@
 ;;; Commentary:
 
 ;;; Code:
-
-
-(require 'dash)
 
 
 (defgroup visual-ascii-mode nil
@@ -91,15 +88,15 @@ nil means not to display unprintable character."
 
 (defun visual-ascii-mode/render ()
   "Render ascii characters."
-  (--each visual-ascii-mode/overlays
-    (overlay-put it
+  (dolist (ov visual-ascii-mode/overlays)
+    (overlay-put ov
                  'after-string
-                 (overlay-get it 'visual-ascii-str))))
+                 (overlay-get ov 'visual-ascii-str))))
 
 (defun visual-ascii-mode/cleanup ()
   "Clean visual-ascii-mode overlays."
-  (--each visual-ascii-mode/overlays
-    (delete-overlay it))
+  (dolist (ov visual-ascii-mode/overlays)
+    (delete-overlay ov))
   (setq visual-ascii-mode/overlays nil))
 
 (defun visual-ascii-mode/visual-area ()
