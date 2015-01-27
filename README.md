@@ -34,8 +34,7 @@ Non-nil means that also visualize ascii code inside comment or string.
 
 `visual-ascii-mode-show-unprintable-character` (default: t)
 
-This variable controls whether/how to display unprintable characters.
-
-t means to show control characters in C-what style (which returned by `single-key-description'),
-`abbrev' means to use ASCII control code abbreviation,
+This variable controls whether/how to display unprintable characters:   
+t means to show control characters in C-what style (which returned by `single-key-description'),   
+`abbrev' means to use ASCII control code abbreviation,   
 nil means not to display unprintable character.
