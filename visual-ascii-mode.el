@@ -152,7 +152,7 @@ nil means not to display unprintable character."
 (defun visual-ascii-mode/make-overlay (beg end)
   "Make overlay for the number between BEG and END."
   (let ((n (visual-ascii-mode/str2num (buffer-substring-no-properties beg end))))
-    (when (and (>= n 0) (integerp n))
+    (when (and (integerp n) (>= n 0))
       (let ((printable (and 
                         (characterp n)
                         (aref printable-chars n)))
