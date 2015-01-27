@@ -33,7 +33,8 @@
 
 (defgroup visual-ascii-mode nil
   "Visualize ascii code on buffer"
-  :prefix "visual-ascii-mode")
+  :prefix "visual-ascii-mode"
+  :group 'Convenience)
 
 (defcustom visual-ascii-mode-show-unicode nil
   "Non-nil means that any integer less than (max-char) will be recognized as
