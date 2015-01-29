@@ -47,7 +47,7 @@
   :group 'Convenience)
 
 (defcustom visual-ascii-mode-show-unicode nil
-  "Non-nil means that any integer less than (max-char) will be recognized as
+  "Non-nil means that any integer less than (`max-char') will be recognized as
  unicode and be visualized."
   :type 'boolean
   :group 'visual-ascii-mode)
