@@ -173,11 +173,10 @@ nil means not to display unprintable character."
                    (and visual-ascii-mode-show-unicode
                         (characterp n))
                    (and visual-ascii-mode-show-unprintable-character
-                        ;; 132120576 = 0b111111000000000000000000000
-                        (logand 132120576 n)
-                        ;; 2097151 = 0b111111111111111111111
-                        (let ((n_ (logand 2097151 n)))
-                          (and (>= n_ 27) (< n_ 128)))))
+                        ;; 260046848 = 0b1111110000000000000000000000
+                        (logand 260046848 n)
+                        ;; 4194303 = 0b1111111111111111111111
+                        (< (logand 4194303 n) 128)))
                (single-key-description n)))))
         (when desc
           (let ((ov (make-overlay beg end))
