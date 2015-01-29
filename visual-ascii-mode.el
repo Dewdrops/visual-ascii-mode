@@ -110,26 +110,11 @@ nil means not to display unprintable character."
     (delete-overlay ov))
   (setq visual-ascii-mode/overlays nil))
 
-(defun visual-ascii-mode/visual-area ()
-  "Return (beg . end) which denotes current visual area in the window."
-  (let (beg end)
-    (ignore-errors
-      (save-excursion
-        (move-to-window-line 0)
-        (setq beg (point)))
-      (save-excursion
-        (move-to-window-line -1)
-        (end-of-line)
-        (setq end (point)))
-      (cons beg end))))
-
 (defun visual-ascii-mode/handler ()
   "Handler called in `post-command-hook'."
-  (let ((va (visual-ascii-mode/visual-area)))
-    (when va
-      (visual-ascii-mode/cleanup)
-      (visual-ascii-mode/populate-overlays (car va) (cdr va))
-      (visual-ascii-mode/render))))
+  (visual-ascii-mode/cleanup)
+  (visual-ascii-mode/populate-overlays (window-start) (window-end))
+  (visual-ascii-mode/render))
 
 (defun visual-ascii-mode/comment-or-string-p ()
   "Determine whether inside string/comment cntext."
@@ -196,8 +181,7 @@ nil means not to display unprintable character."
   (if visual-ascii-mode
       (progn
         (add-hook 'post-command-hook 'visual-ascii-mode/handler t 'local)
-        (visual-ascii-mode/populate-overlays (max (- (point) 1000) (point-min))
-                                             (min (+ (point) 1000) (point-max)))
+        (visual-ascii-mode/populate-overlays (window-start) (window-end))
         (visual-ascii-mode/render))
     (progn
       (remove-hook 'post-command-hook 'visual-ascii-mode/handler 'local)
